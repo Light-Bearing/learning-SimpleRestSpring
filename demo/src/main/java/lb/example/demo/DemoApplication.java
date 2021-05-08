@@ -14,16 +14,10 @@ import java.util.Set;
 
 @SpringBootApplication
 @AllArgsConstructor
-public class DemoApplication implements ApplicationRunner {
-
-    private UserRepository userRepository;
+public class DemoApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        System.out.println(userRepository.findByLastNameContainingIgnoreCase("last"));
-    }
 }
