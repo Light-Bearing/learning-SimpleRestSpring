@@ -13,8 +13,9 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@ToString(callSuper = true,exclude = {"password"})
 public class User extends AbstractPersistable<Integer> {
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -42,4 +43,5 @@ public class User extends AbstractPersistable<Integer> {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
 }
