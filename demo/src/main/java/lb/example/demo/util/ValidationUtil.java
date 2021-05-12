@@ -1,11 +1,12 @@
 package lb.example.demo.util;
 
+import lb.example.demo.error.IllegalRequestDataException;
 import lb.example.demo.model.BaseEntity;
 
 public class ValidationUtil {
     public static void checkNew(BaseEntity entity) {
         if (!entity.isNew()) {
-            throw new IllegalArgumentException(entity + " must be new (id = null)");
+            throw new IllegalRequestDataException(entity.getClass().getSimpleName() + " must be new (id = null)");
         }
     }
 
@@ -13,7 +14,7 @@ public class ValidationUtil {
         if (entity.isNew()) {
             entity.setId(id);
         } else if (entity.id() != id) {
-            throw new IllegalArgumentException(entity + "must has id=" + id);
+            throw new IllegalRequestDataException(entity + " must has id=" + id);
         }
     }
 }

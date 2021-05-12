@@ -1,5 +1,6 @@
 package lb.example.demo.repository;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lb.example.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
+@Tag(name = "User Controller")
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @RestResource(rel = "by-email", path = "by-email")

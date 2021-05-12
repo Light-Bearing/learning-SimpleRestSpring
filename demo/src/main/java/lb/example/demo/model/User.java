@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lb.example.demo.util.JsonDeserializers;
 import lombok.*;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Set;
 
 @Getter
@@ -19,7 +21,7 @@ import java.util.Set;
 @Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@ToString(callSuper = true,exclude = {"password"})
+@ToString(callSuper = true, exclude = {"password"})
 public class User extends BaseEntity implements Serializable {
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -49,5 +51,9 @@ public class User extends BaseEntity implements Serializable {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    public void setEmail(String email) {
+        this.email = StringUtils.hasText(email) ? email.toLowerCase() : null;
+    }
 
 }
