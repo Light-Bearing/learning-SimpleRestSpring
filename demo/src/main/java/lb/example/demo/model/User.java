@@ -1,5 +1,8 @@
 package lb.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lb.example.demo.util.JsonDeserializers;
 import lombok.*;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -31,6 +34,8 @@ public class User extends BaseEntity implements Serializable {
     private String lastName;
     @Column(name = "password")
     @Size(max = 256)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = JsonDeserializers.PasswordDeserializer.class)
     private String password;
     @Enumerated(EnumType.STRING)
     @CollectionTable(
